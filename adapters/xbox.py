@@ -1,36 +1,63 @@
 import pygame
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc import VSSClient
+import time
 
-databroker_host = 'localhost'
+databroker_host = '127.0.0.1'
+# databroker_host = '0.0.0.0'
+# databroker_host = 'localhost'
 databroker_port = '55555'
-joystick_tolerance = 20
+joystick_tolerance = 0.6
 value_to_send = 1
 
 
 class XboxController(object):
 
-    client = VSSClient(host=databroker_host, port=databroker_port)
+    
     joystick = None
 
     def __init__(self):
+        # Initialize Pygame
+        pygame.init()
+
         pygame.joystick.init()
+
         self.joystick = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())][0]
+        self.joystick.init()
+
+        self.client = VSSClient(host=databroker_host, port=databroker_port)
         self.client.connect()
 
     def main(self):
         # main loop
         while True:
+            time.sleep(0.01)
             # read the xbox controller inputs and translate them to the data broker
+            
+            # for i in range(5):
+                # print("", i, self.joystick.get_axis(i) )
+            # print("", self.joystick.get_axis(0) )
+            pygame.event.pump() 
+            # print(f"Axis 0: {self.joystick.get_axis(0)}, Axis 1: {self.joystick.get_axis(1)}")
+
 
             # left
-            if self.joystick.get_axis(axis_number=0) < -joystick_tolerance:
-                self.client.set_current_values({'Acceleration.Longitudinal': Datapoint(value_to_send)})
-
+            if self.joystick.get_axis(0) < -joystick_tolerance:
+                self.client.set_current_values({'Vehicle.Acceleration.Longitudinal': Datapoint(value_to_send)})
+                print("left")
+                
+                
             # right
-            if self.joystick.get_axis(axis_number=0) > joystick_tolerance:
-                self.client.set_current_values({'Acceleration.Lateral': Datapoint(value_to_send)})
+            if self.joystick.get_axis(0) > joystick_tolerance:
+                self.client.set_current_values({'Vehicle.Acceleration.Lateral': Datapoint(value_to_send)})
+                print("right")
 
             # up
-            if self.joystick.get_axis(axis_number=1) > joystick_tolerance:
-                self.client.set_current_values({'Acceleration.Vertical': Datapoint(value_to_send)})
+            if self.joystick.get_axis(1) < -joystick_tolerance:
+                self.client.set_current_values({'Vehicle.Acceleration.Vertical': Datapoint(value_to_send)})
+                print("up")
+
+
+if __name__=="__main__":
+    xbox = XboxController()
+    xbox.main()

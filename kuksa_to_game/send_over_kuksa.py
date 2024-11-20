@@ -7,8 +7,8 @@ from kuksa_client.grpc import Metadata
 from kuksa_client.grpc import VSSClient
 
 
-# databroker_host = '127.0.0.1'
-databroker_host = '0.0.0.0'
+databroker_host = '127.0.0.1'
+# databroker_host = '0.0.0.0'
 databroker_port = '55555'
 client = VSSClient(databroker_host, databroker_port)
 client.connect()
