@@ -1,35 +1,36 @@
 import pygame
-import random
 from kuksa_client.grpc import Datapoint
-from kuksa_client.grpc import DataEntry
-from kuksa_client.grpc import DataType
-from kuksa_client.grpc import EntryUpdate
-from kuksa_client.grpc import Field
-from kuksa_client.grpc import Metadata
 from kuksa_client.grpc import VSSClient
 
 databroker_host = 'localhost'
 databroker_port = '55555'
+joystick_tolerance = 20
+value_to_send = 1
 
-pygame.init()
 
+class XboxController(object):
 
-# kuksa databroker
-client = VSSClient(databroker_host, databroker_port)
-client.connect()
+    client = VSSClient(host=databroker_host, port=databroker_port)
+    joystick = None
 
-# main loop
-while True:
-    # get brake signal to move the right player up
-    current_values = client.get_current_values(
-        ['Acceleration.Longitudinal', 'Vehicle.Chassis.Accelerator.PedalPosition'])
-    if current_values['Acceleration.Longitudinal'] is not None:
-        if current_values['Acceleration.Longitudinal'].value > 0:
-            right_paddle_vel = -0.9
-            second_right_paddle_vel = -0.9
-        elif current_values['Vehicle.Chassis.Accelerator.PedalPosition'].value > 20:
-            right_paddle_vel = 0.9
-            second_right_paddle_vel = 0.9
-        else:
-            right_paddle_vel = 0
-            second_right_paddle_vel = 0
+    def __init__(self):
+        pygame.joystick.init()
+        self.joystick = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())][0]
+        self.client.connect()
+
+    def main(self):
+        # main loop
+        while True:
+            # read the xbox controller inputs and translate them to the data broker
+
+            # left
+            if self.joystick.get_axis(axis_number=0) < -joystick_tolerance:
+                self.client.set_current_values({'Acceleration.Longitudinal': Datapoint(value_to_send)})
+
+            # right
+            if self.joystick.get_axis(axis_number=0) > joystick_tolerance:
+                self.client.set_current_values({'Acceleration.Lateral': Datapoint(value_to_send)})
+
+            # up
+            if self.joystick.get_axis(axis_number=1) > joystick_tolerance:
+                self.client.set_current_values({'Acceleration.Vertical': Datapoint(value_to_send)})
