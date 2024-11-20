@@ -8,6 +8,9 @@ databroker_host = '127.0.0.1'
 databroker_port = '55555'
 joystick_tolerance = 0.6
 value_to_send = 1
+signal_name_left = 'Vehicle.Acceleration.Longitudinal'
+signal_name_right = 'Vehicle.Acceleration.Lateral'
+signal_name_up = 'Vehicle.Acceleration.Vertical'
 
 
 class XboxController(object):
@@ -35,19 +38,18 @@ class XboxController(object):
 
             # left
             if self.joystick.get_axis(0) < -joystick_tolerance:
-                self.client.set_current_values({'Vehicle.Acceleration.Longitudinal': Datapoint(value_to_send)})
-                print("left")
-                
-                
+                self.client.set_current_values({signal_name_left: Datapoint(value_to_send)})
+                print("<-")
+
             # right
             if self.joystick.get_axis(0) > joystick_tolerance:
-                self.client.set_current_values({'Vehicle.Acceleration.Lateral': Datapoint(value_to_send)})
-                print("right")
+                self.client.set_current_values({signal_name_right: Datapoint(value_to_send)})
+                print("->")
 
             # up
             if self.joystick.get_axis(1) < -joystick_tolerance:
-                self.client.set_current_values({'Vehicle.Acceleration.Vertical': Datapoint(value_to_send)})
-                print("up")
+                self.client.set_current_values({signal_name_up: Datapoint(value_to_send)})
+                print("^")
 
 
 if __name__=="__main__":
