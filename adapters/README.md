@@ -45,3 +45,5 @@ podman run --rm -it \
     -v /run/user/$(id -u)/pulse/native:/run/user/$(id -u)/pulse/native \
     -v ~/.config/pulse/cookie:/root/.config/pulse/cookie \
     blobbyvolley2 blobby
+
+
