@@ -19,9 +19,11 @@ https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/challenge-play-by-wire
     - Blobby Volley 2
         - https://sourceforge.net/projects/blobby/
         - C++ source code
-3. Architecture
+3. Develop the solution architecture
     - [Diagram](solution_architecture.drawio.svg)
-4. Implementation
+4. Define the interfaces
+5. Implement the necessary modules, test it
+6. Create the pitch slides
 
 ## Team
 
@@ -51,28 +53,34 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 
 ## Tool stack
 
-* Linux OS (host OS)
+* Linux OS (host OS for both Raspberry Pi's and laptop)
 * C++ (game source code)
 * Python 3 (adapter implementation)
 * Podman (containerizing of components)
 * Ankaios (orchestrating of the containers)
 * Kuksa (standard implementations of certain modules)
+* Visual Studio Code and JetBrains PyCharm
 
 ## Hardware Setup
 
-* Controller
+* Xbox Gamepad
+* Joystick
 * Display
-* Gamepad
-* Mobile Device (Smartphone)
-* WLAN
-* Raspberry Pi 
-    * Central HPC
-    * Vehicle HPC
-* Linux laptop with x86 processor architecture
-    * Game HPC
+* Local WLAN
+* 2x Raspberry Pi as
+    * HPC
+    * Door ECU
+* Linux laptop with x86 processor architecture as
+    * Gaming unit
 
 ## Showcase/Presentation
 
-1. Start all modules
-2. Use several input interfaces to play the game
+1. Set the stage
+2. Present the business case
+3. Start all modules
+4. Use both input interfaces to play the game
+5. Give an outlook to perspectives
 
+## Architecture
+
+![Solution architecture](solution_architecture.drawio.svg)
