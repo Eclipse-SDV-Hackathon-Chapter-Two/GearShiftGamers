@@ -13,7 +13,7 @@ except:
     from parameters import signal_name_left, signal_name_right, signal_name_up
     from parameters import joy_name_left, joy_name_right, joy_name_up
 
-# databroker_host = '127.0.0.1'
+# DATABROKER_HOST = '127.0.0.1'
 databroker_host = '0.0.0.0'
 databroker_port = '55555'
 joystick_tolerance = 0.2
