@@ -183,16 +183,47 @@ str_left = f'xdotool type --delay 1 "{30*'A'}"'
 curl -sfL https://github.com/eclipse-ankaios/ankaios/releases/latest/download/install.sh | bash -
 
 ### How configurate Ankaios Server
-
 The conent of [Service] /etc/systemd/system/ank-server.service has to be edited as:
-
+````python
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -a {HOST_IP_ADDRESS:25551} --startip-config /etc/ankaois/state.yaml
+````
 
 ### How configurate Ankaios Agent
 The conent of [Service] /etc/systemd/system/ank-agent.service has to be edited as:
-
+````python
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -s {HOST_IP_ADDRESS:25551} --name {AGENT_NAME}
+````
+
+### How to set agent with ymal file manifest
+
+The content of /etc/ankaios/state.yaml has to be edited.
+
+Add databroker manifest in /etc/ankaios/state.yaml:
+````python
+apiVersion: v0.1
+workloads:
+  databroker:
+    runtime: podman
+    agent: agent_A
+    runtimeConfig: |
+      image: ghcr.io/eclipse/kuksa.val/databroker:0.4.1
+      commandArgs: ["--insecure"]
+      commandOptions: ["--net=host"]
+````
+
+Add joystick manifest in /etc/ankaios/state.yaml:
+````python
+apiVersion: v0.1
+workloads:
+  joystick:
+    runtime: podman
+    agent: agent_joy
+    runtimeConfig: |
+      image: joystick_adapter //here you have to replace with your own image path
+      commandArgs: ["--insecure"]
+      commandOptions: ["--net=host"]
+````
