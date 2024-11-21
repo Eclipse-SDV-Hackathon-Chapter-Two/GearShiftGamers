@@ -116,11 +116,20 @@ gRPC client to transport signals.
 We use some existing signals for transport controls 
 from the input devices to the game.
 
+Xbox-Controller:
 | Signal name                         | Purpose    |
 |-------------------------------------|------------|
 | `Vehicle.Acceleration.Longitudinal` | Move left  |
 | `Vehicle.Acceleration.Lateral`      | Move right |
 | `Vehicle.Acceleration.Vertical`     | Jump       |
+
+Adafruit-Joystick
+| Signal name                         | Purpose    |
+|-------------------------------------|------------|
+| `Vehicle.AngularVelocity.Roll`     | Move left  |
+| `Vehicle.AngularVelocity.Pitch`    | Move right |
+| `Vehicle.AngularVelocity.Yaw`      | Jump       |
+
 
 ### Containerizing
 
