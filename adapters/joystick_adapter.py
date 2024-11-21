@@ -16,13 +16,20 @@ ads = ADS.ADS1115(i2c)
 x_channel = AnalogIn(ads, ADS.P0)
 y_channel = AnalogIn(ads, ADS.P1)
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = ('192.168.0.148', 65432)
-client_socket.connect(server_address)
+# client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# server_address = ('192.168.0.148', 65432)
+# client_socket.connect(server_address)
 
-add = os.environ.get('KUKSA_DATA_BROKER_ADDR', '198.168.0.148')
-port = int(os.environ.get('KUKSA_DATA_BROKER_PORT', '55555'))
-mode = os.environ.get('SPEED_PROVIDE_MODE', 'webui')
+# add = os.environ.get('KUKSA_DATA_BROKER_ADDR', '198.168.0.148')
+# port = int(os.environ.get('KUKSA_DATA_BROKER_PORT', '55555'))
+# mode = os.environ.get('SPEED_PROVIDE_MODE', 'webui')
+
+
+# databroker_host = '127.0.0.1'
+databroker_host = '192.168.0.148'
+databroker_port = '55555'
+client = VSSClient(host=databroker_host, port=databroker_port)
+client.connect()
 
 def log(msg):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
