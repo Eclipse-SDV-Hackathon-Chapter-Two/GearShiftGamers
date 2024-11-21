@@ -208,7 +208,7 @@ apiVersion: v0.1
 workloads:
   databroker:
     runtime: podman
-    agent: agent_A
+    agent: agent_databroker
     runtimeConfig: |
       image: ghcr.io/eclipse/kuksa.val/databroker:0.4.1
       commandArgs: ["--insecure"]
