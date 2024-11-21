@@ -40,14 +40,14 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 
 ## Key resources
 
-1. SDV hackathon repository https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/GearShiftGamers.git
-2. SDV products https://projects.eclipse.org/working-group/eclipse-software-defined-vehicle
-3. Game https://sourceforge.net/projects/blobby/
+1. [SDV hackathon repository](https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/GearShiftGamers.git)
+2. [SDV product list](https://projects.eclipse.org/working-group/eclipse-software-defined-vehicle)
+3. [Game Valley Blobby 2](https://sourceforge.net/projects/blobby/)
     1. Dependencies `sudo apt-get install build-essential libsdl2-dev libphysfs-dev libboost-all-dev`
-4. Ankaios https://eclipse-ankaios.github.io/ankaios/latest/
-5. Ankaios Dashboard https://github.com/FelixMoelders/ankaios-dashboard/
-6. Kuksa https://eclipse-kuksa.github.io/kuksa-website/
-7. Podman https://phoenixnap.com/kb/podman-tutorial
+4. [Ankaios](https://eclipse-ankaios.github.io/ankaios/latest/)
+5. [Ankaios Dashboard](https://github.com/FelixMoelders/ankaios-dashboard/)
+6. [Kuksa](https://eclipse-kuksa.github.io/kuksa-website/)
+7. [Podman](https://phoenixnap.com/kb/podman-tutorial)
 
 ## Tool stack
 
