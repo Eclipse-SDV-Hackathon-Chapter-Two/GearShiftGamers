@@ -1,6 +1,10 @@
 from kuksa_client.grpc import VSSClient
 import subprocess
 import time
+from datetime import datetime, timedelta
+from xdo import Xdo
+import pexpect
+
 try:
     from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
     from adapters.parameters import joy_name_left, joy_name_right, joy_name_up
@@ -10,18 +14,18 @@ except:
 
 KEY_REPEAT = 15
 
-import os
-os.environ["DISPLAY"] = ":0" 
-
 # databroker_host = '127.0.0.1'
 databroker_host = '192.168.0.148'
 databroker_port = '55555'
 client = VSSClient(databroker_host, databroker_port)
 client.connect()
 
-str_right = "xdotool key D && xdotool key D \n"
-str_left = "xdotool key A && xdotool key A \n"
-str_up = "xdotool key W && xdotool key W \n"
+str_right = f'xdotool key --delay 1 {30*'D '} D'
+str_left = f'xdotool type --delay 1 "{30*'A'}"'
+str_up = f'xdotool type --delay 1 "{3*'W'}"'
+
+# str_left = "xdotool key A && xdotool key A \n"
+# str_up = "xdotool key W && xdotool key W \n"
 
 arrow_right = "xdotool key Right && xdotool key Right && xdotool key Right\n"
 arrow_left = "xdotool key Left && xdotool key Left && xdotool key Left\n"
@@ -31,46 +35,95 @@ process = subprocess.Popen(["/bin/bash"], stdin=subprocess.PIPE, stdout=subproce
 
 stopwatch = time.time()
 
+start_time = datetime.min
+xbox_ri_Last = start_time
+xbox_le_Last = start_time
+xbox_up_Last = start_time
+joy_ri_Last = start_time
+joy_le_Last = start_time
+joy_up_Last = start_time
+
+# Open a new bash session
+child = pexpect.spawn('bash')
+
 while True:
+
+    # get_value = client.subscribe_current_values
+    get_value = client.get_current_values
+    # get_value = client.subscribe
+
     # print("stopwatch:", time.time() - time.time())
-    Lateral = client.get_current_values([signal_name_right])
-    Longitudinal = client.get_current_values([signal_name_left])
-    Vertical = client.get_current_values([signal_name_up])
+    xbox_ri = get_value([signal_name_right])[signal_name_right]
+    # xbox_ri = get_value([signal_name_right])
+    # for i in xbox_ri:
+        # print(i)
+    xbox_le = get_value([signal_name_left])[signal_name_left]
+    xbox_up = get_value([signal_name_up])[signal_name_up]
 
-    Roll = client.get_current_values([joy_name_right])
-    Pitch = client.get_current_values([joy_name_left])
-    Yaw = client.get_current_values([joy_name_up])
+    joy_ri = get_value([joy_name_right])[joy_name_right]
+    joy_le = get_value([joy_name_left])[joy_name_left]
+    joy_up = get_value([joy_name_up])[joy_name_up]
 
-    # print(Pitch)
+
 
     try:
-        # print(Roll[joy_name_right].value, Pitch[joy_name_left].value, Yaw[joy_name_up].value)
-        if Roll[joy_name_right].value > 0.0:
+        print("joy: ", joy_ri.value, joy_le.value, joy_up.value)
+
+        if joy_ri.value > 0.1:
+            pass
             subprocess.run(arrow_right, shell=True)
 
-        if Pitch[joy_name_left].value > 0.0:
+
+        if joy_le.value > 0.1:
+            pass
             subprocess.run(arrow_left, shell=True)
 
-        if Yaw[joy_name_up].value > 0.0:
+        if joy_up.value > 0.1:
+            pass
             subprocess.run(arrow_up, shell=True)
     except:
         print("start joystick of pi@vehicle")
 
 
     try:
-        print(Lateral[signal_name_right].value)
-        if Lateral[signal_name_right].value > 0.0:
-            subprocess.run(str_right, shell=True)
+        print("xbox:", xbox_ri.value, xbox_le.value, xbox_up.value)
+        # print("xbox:", xbox_ri.timestamp, xbox_le.timestamp, xbox_up.timestamp)
 
-        if Longitudinal[signal_name_left].value > 0.0:
-            subprocess.run(str_left, shell=True)
+        if xbox_ri.value > 0.1 and xbox_ri.timestamp > xbox_ri_Last:
+            pass
+            # subprocess.run(str_right, shell=True)
+            # xdo.focus_window(0, "d", 0)
+            child.sendline(str_right)
+            # child.interact()
 
-        if Vertical[signal_name_up].value > 0.0:
+        if xbox_le.value > 0.1 and xbox_le.timestamp > xbox_le_Last:
+<<<<<<< HEAD
+            pass
+            # subprocess.run(str_left, shell=True)
+            child.sendline(str_left)
+
+        if xbox_up.value > 0.1 and xbox_up.timestamp > xbox_up_Last:
+            pass
             subprocess.run(str_up, shell=True)
+=======
+            pass
+            # subprocess.run(str_left, shell=True)
+            child.sendline(str_left)
+
+        if xbox_up.value > 0.1 and xbox_up.timestamp > xbox_up_Last:
+            pass
+            # subprocess.run(str_up, shell=True)
+>>>>>>> 8e30d63 (keyboard adapter)
+            child.sendline(str_up)
+
+        xbox_ri_Last = xbox_ri.timestamp
+        xbox_le_Last = xbox_le.timestamp
+        xbox_up_Last = xbox_up.timestamp
+
     except:
         pass
         print("start xbox controller")
 
-    time.sleep(0.0001)
+    # time.sleep(0.01)
 
 
