@@ -76,6 +76,7 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
     * Door ECU
 * Linux laptop with x86 processor architecture as
     * Gaming unit
+* Dedicated laptop for dashboard showcase
 
 ## Showcase/Presentation
 
@@ -93,7 +94,7 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 
 ### Game
 
-For purposes of the Hackathon challenge a game should be chosen.
+For purposes of the Hackathon challenge, a game should be chosen.
 The following criteria should be fulfilled:
 
 - multiplayer
@@ -137,7 +138,7 @@ instance is used for container orchestrating.
 
 ### Implementation toolstack
 
-We use [Python](https://www.python.org) and IDE's
+We use [Python 3](https://www.python.org) and IDE's
 [Visual Studio Code](https://code.visualstudio.com) and
 [JetBrains PyCharm](https://www.jetbrains.com/pycharm/)
 for code developing.
@@ -146,7 +147,7 @@ for code developing.
 
 We simulate keyboard controls for both players.
 
-Player 1 uses following keys:
+Player 1 uses the following keys:
 
 | Key | Purpose    |
 |-----|------------|
@@ -167,8 +168,8 @@ We use calls for Linux tool
 to fake the keystrokes if corresponding signals
 are received.
 
-For simulation of the human key pressing
-we send every keystroke 30 times with delay of 1ms.
+For simulation of the human key pressing, 
+we send every keystroke 30 times with a delay of 1ms.
 
 ````python
 str_left = f'xdotool type --delay 1 "{30*'A'}"'
