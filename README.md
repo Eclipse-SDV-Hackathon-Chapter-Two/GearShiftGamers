@@ -14,7 +14,7 @@ https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/challenge-play-by-wire
 
 1. Define the inputs
     - Player 1 uses the Xbox gamepad
-    - Player 2 uses an in-car joystick, simulated by
+    - Player 2 uses an in-car joystick, simulated by a Raspberry Pi
 2. Choose a game
     - Blobby Volley 2
         - https://sourceforge.net/projects/blobby/
