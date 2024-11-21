@@ -4,16 +4,8 @@ from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc import VSSClient
 import time
 import random
+from adapters.parameters import SIGNAL_NAME_LEFT, SIGNAL_NAME_RIGHT, SIGNAL_NAME_UP, DATABROKER_HOST, DATABROKER_PORT
 
-
-try:
-    from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
-except:
-    from parameters import signal_name_left, signal_name_right, signal_name_up
-
-# DATABROKER_HOST = '127.0.0.1'
-databroker_host = '0.0.0.0'
-databroker_port = '55555'
 joystick_tolerance = 0.2
 value_to_send = 1
 
@@ -34,7 +26,7 @@ class XboxController(object):
         self.client = None
 
     def connect_to_databroker(self) -> None: 
-        self.client = VSSClient(host=databroker_host, port=databroker_port)
+        self.client = VSSClient(host=DATABROKER_HOST, port=DATABROKER_PORT)
         self.client.connect()
 
 
@@ -55,24 +47,24 @@ class XboxController(object):
 
                 # left
                 if axis_0 < -joystick_tolerance:
-                    self.client.set_current_values({signal_name_left: Datapoint(value_to_send + rand_offset)})
+                    self.client.set_current_values({SIGNAL_NAME_LEFT: Datapoint(value_to_send + rand_offset)})
                     print("<-")
                 else:
-                    self.client.set_current_values({signal_name_left: Datapoint(0)})
+                    self.client.set_current_values({SIGNAL_NAME_LEFT: Datapoint(0)})
 
                 # right
                 if axis_0 > joystick_tolerance:
-                    self.client.set_current_values({signal_name_right: Datapoint(value_to_send + rand_offset)})
+                    self.client.set_current_values({SIGNAL_NAME_RIGHT: Datapoint(value_to_send + rand_offset)})
                     print("->")
                 else:
-                    self.client.set_current_values({signal_name_right: Datapoint(0)})
+                    self.client.set_current_values({SIGNAL_NAME_RIGHT: Datapoint(0)})
 
                 # up
                 if axis_1 < -joystick_tolerance:
-                    self.client.set_current_values({signal_name_up: Datapoint(value_to_send + rand_offset) })
+                    self.client.set_current_values({SIGNAL_NAME_UP: Datapoint(value_to_send + rand_offset) })
                     print("^")
                 else:
-                    self.client.set_current_values({signal_name_up: Datapoint(0)})
+                    self.client.set_current_values({SIGNAL_NAME_UP: Datapoint(0)})
 
             except Exception as e:
                 print("Kuksa Databroker is down...try to connect")

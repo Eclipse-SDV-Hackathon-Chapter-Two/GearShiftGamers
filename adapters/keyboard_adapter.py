@@ -3,18 +3,13 @@ import subprocess
 import time
 from datetime import datetime
 import pexpect
-
-try:
-    from adapters.parameters import signal_name_left, signal_name_right, signal_name_up, DATABROKER_HOST, \
-        databroker_port
-    from adapters.parameters import joy_name_left, joy_name_right, joy_name_up
-except:
-    from parameters import signal_name_left, signal_name_right, signal_name_up
-    from parameters import joy_name_left, joy_name_right, joy_name_up
+from adapters.parameters import SIGNAL_NAME_LEFT, SIGNAL_NAME_RIGHT, SIGNAL_NAME_UP, DATABROKER_HOST, \
+    DATABROKER_PORT
+from adapters.parameters import JOY_NAME_LEFT, JOY_NAME_RIGHT, JOY_NAME_UP
 
 KEY_REPEAT = 15
 
-client = VSSClient(DATABROKER_HOST, databroker_port)
+client = VSSClient(DATABROKER_HOST, DATABROKER_PORT)
 client.connect()
 
 str_right = f'xdotool key --delay 1 {30*'D '} D'
@@ -44,13 +39,13 @@ while True:
 
     get_value = client.get_current_values
 
-    xbox_ri = get_value([signal_name_right])[signal_name_right]
-    xbox_le = get_value([signal_name_left])[signal_name_left]
-    xbox_up = get_value([signal_name_up])[signal_name_up]
+    xbox_ri = get_value([SIGNAL_NAME_RIGHT])[SIGNAL_NAME_RIGHT]
+    xbox_le = get_value([SIGNAL_NAME_LEFT])[SIGNAL_NAME_LEFT]
+    xbox_up = get_value([SIGNAL_NAME_UP])[SIGNAL_NAME_UP]
 
-    joy_ri = get_value([joy_name_right])[joy_name_right]
-    joy_le = get_value([joy_name_left])[joy_name_left]
-    joy_up = get_value([joy_name_up])[joy_name_up]
+    joy_ri = get_value([JOY_NAME_RIGHT])[JOY_NAME_RIGHT]
+    joy_le = get_value([JOY_NAME_LEFT])[JOY_NAME_LEFT]
+    joy_up = get_value([JOY_NAME_UP])[JOY_NAME_UP]
 
     try:
         print("joy: ", joy_ri.value, joy_le.value, joy_up.value)
