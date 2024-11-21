@@ -62,7 +62,7 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 * Python 3 (adapter implementation)
 * Podman (containerizing of components)
 * Ankaios (orchestrating of the containers)
-* Kuksa (standard implementations of certain modules)
+* Kuksa (communication between different nodes)
 * Visual Studio Code and JetBrains PyCharm
 
 ## Hardware Setup
