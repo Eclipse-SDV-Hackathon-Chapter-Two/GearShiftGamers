@@ -24,6 +24,9 @@
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="1uTvHPG8ILP7znkW-QF_-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="1uTvHPG8ILP7znkW-QF_-12" target="1uTvHPG8ILP7znkW-QF_-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="1uTvHPG8ILP7znkW-QF_-12" value="Data broker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="540" y="300" width="120" height="60" as="geometry" />
         </mxCell>
@@ -86,6 +89,9 @@
         </mxCell>
         <mxCell id="1uTvHPG8ILP7znkW-QF_-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="1uTvHPG8ILP7znkW-QF_-19" target="1uTvHPG8ILP7znkW-QF_-20">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1uTvHPG8ILP7znkW-QF_-32" value="Arkaios dashboard" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="527" width="160" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
