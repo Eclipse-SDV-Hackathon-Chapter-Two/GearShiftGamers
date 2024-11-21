@@ -87,7 +87,7 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 
 ## Architecture
 
-![Solution architecture](solution_architecture.drawio.svg)
+![Solution architecture](assets/solution_architecture.drawio.svg)
 
 ## Important architecture decisions
 
@@ -116,7 +116,7 @@ We use some existing signals for transport controls
 from the input devices to the game.
 
 Xbox-Controller:
-| Signal name                         | Purpose    |
+| Signal name | Purpose |
 |-------------------------------------|------------|
 | `Vehicle.Acceleration.Longitudinal` | Move left  |
 | `Vehicle.Acceleration.Lateral`      | Move right |
@@ -179,20 +179,30 @@ we send every keystroke 30 times with a delay of 1ms.
 ````python
 str_left = f'xdotool type --delay 1 "{30*'A'}"'
 ````
-### How to install Ankaios 
-curl -sfL https://github.com/eclipse-ankaios/ankaios/releases/latest/download/install.sh | bash -
 
-### How configurate Ankaios Server
-The conent of [Service] /etc/systemd/system/ank-server.service has to be edited as:
-````python
+## How-to's
+
+### How to install Ankaios
+
+```shell
+curl -sfL https://github.com/eclipse-ankaios/ankaios/releases/latest/download/install.sh | bash -
+```
+
+### How to configurate Ankaios Server
+
+The content of [Service] /etc/systemd/system/ank-server.service has to be edited as:
+
+````dockerfile
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -a {HOST_IP_ADDRESS:25551} --startip-config /etc/ankaois/state.yaml
 ````
 
-### How configurate Ankaios Agent
-The conent of [Service] /etc/systemd/system/ank-agent.service has to be edited as:
-````python
+### How to configurate Ankaios Agent
+
+The content of [Service] /etc/systemd/system/ank-agent.service has to be edited as:
+
+````dockerfile
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -s {HOST_IP_ADDRESS:25551} --name {AGENT_NAME}
@@ -200,10 +210,11 @@ ExecStart=/usr/local/bin/ank-server --insecure -s {HOST_IP_ADDRESS:25551} --name
 
 ### How to set agent with ymal file manifest
 
-The content of /etc/ankaios/state.yaml has to be edited.
+The content of `/etc/ankaios/state.yaml` has to be edited.
 
-Add databroker manifest in /etc/ankaios/state.yaml:
-````python
+Add databroker manifest in `/etc/ankaios/state.yaml`:
+
+````yaml
 apiVersion: v0.1
 workloads:
   databroker:
@@ -215,8 +226,9 @@ workloads:
       commandOptions: ["--net=host"]
 ````
 
-Add joystick manifest in /etc/ankaios/state.yaml:
-````python
+Add joystick manifest in `/etc/ankaios/state.yaml`:
+
+````yaml
 apiVersion: v0.1
 workloads:
   joystick:
@@ -227,22 +239,32 @@ workloads:
       commandArgs: ["--insecure"]
       commandOptions: ["--net=host"]
 ````
+
 ### How to start Ankaios Server
 
 Log into the host machine that runs the server.
 
-Activate the server with commad:
-````python
+Activate the server with command:
+
+````shell
 sudo systemctl start ank-server
 ````
+
 ### How to start Ankaios Agent
 
 Log into the host machine that runs the agent.
 First run
-````python
+
+````shell
 sudo systemctl start ank-agent
 ````
+
 And then run
-````python
+
+````shell
 ank-agent -k -s {HOST_IP_ADDRESS:PORT_NUMBER} -n {AGENT_NAME}
 ````
+
+## An obligatory Ai-generated team picture
+
+![Team](assets/team.webp)
