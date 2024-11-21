@@ -1,6 +1,9 @@
 # Project overview
 
-Welcome to Gamer. This canvas includes everything you need to know about this project along with links to important resources and people.
+Welcome to GearShiftGamer Hackathon project.
+This overview includes everything you need 
+to know about this project along with links 
+to important resources and people.
 
 ## Project description
 
@@ -10,19 +13,15 @@ https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/challenge-play-by-wire
 ## Goals
 
 1. Define the inputs
-    1. We use a smart device connected to local server as a controller
-    2. the API is to define
+    - Player 1 uses the Xbox gamepad
+    - Player 2 uses an in-car joystick, simulated by
 2. Choose a game
-    1. Two alternatives
-        1. Blobby Volley
-            1. https://github.com/aikikode/pyvolley
-                1. python 2.7
-            2. https://sourceforge.net/projects/blobby/
-        2. https://grantjenks.com/docs/freegames/connect.html
-        3. https://sourceforge.net/projects/blobby/
-            1. C source code
-
-
+    - Blobby Volley 2
+        - https://sourceforge.net/projects/blobby/
+        - C++ source code
+3. Architecture
+    - [Diagram](solution_architecture.drawio.svg)
+4. Implementation
 
 ## Team
 
@@ -45,16 +44,19 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 2. SDV products https://projects.eclipse.org/working-group/eclipse-software-defined-vehicle
 3. Game https://sourceforge.net/projects/blobby/
     1. Dependencies `sudo apt-get install build-essential libsdl2-dev libphysfs-dev libboost-all-dev`
-        1. cmake: `sudo apt install build-essential`
-        2. SDL: `sudo apt-get install libsdl2-dev`
-        3. PhysFS: `sudo apt-get install libphysfs-dev`
-        4. Boost: `sudo apt-get install libboost-all-dev`
 4. Ankaios https://eclipse-ankaios.github.io/ankaios/latest/
+5. Ankaios Dashboard https://github.com/FelixMoelders/ankaios-dashboard/
+6. Kuksa https://eclipse-kuksa.github.io/kuksa-website/
+7. Podman https://phoenixnap.com/kb/podman-tutorial
 
 ## Tool stack
 
-* Linux OS
-* C++
+* Linux OS (host OS)
+* C++ (game source code)
+* Python 3 (adapter implementation)
+* Podman (containerizing of components)
+* Ankaios (orchestrating of the containers)
+* Kuksa (standard implementations of certain modules)
 
 ## Hardware Setup
 
@@ -63,17 +65,14 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 * Gamepad
 * Mobile Device (Smartphone)
 * WLAN
-    * SSID `bierkiste`
-    * password `AkWyapCidjuOckakkorfObAr`
 * Raspberry Pi 
-    * ip address: `192.168.0.148`
-    * user: `pi`
-    * password: `raspberry`
+    * Central HPC
+    * Vehicle HPC
+* Linux laptop with x86 processor architecture
+    * Game HPC
 
 ## Showcase/Presentation
 
-1. Compile common known Game (BlobbyVolley) for HPC (Rasp4)
-2. Deploy game via MUTO on the HPC (GameStore)
-3. (Start the game (Ankaios)?)
-4. Use several input interfaces to play (Data Broker Ankaios) the game
+1. Start all modules
+2. Use several input interfaces to play the game
 
