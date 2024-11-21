@@ -2,7 +2,6 @@ from kuksa_client.grpc import VSSClient
 import subprocess
 import time
 from datetime import datetime, timedelta
-from xdo import Xdo
 import pexpect
 
 try:
@@ -97,23 +96,12 @@ while True:
             # child.interact()
 
         if xbox_le.value > 0.1 and xbox_le.timestamp > xbox_le_Last:
-<<<<<<< HEAD
-            pass
-            # subprocess.run(str_left, shell=True)
             child.sendline(str_left)
 
         if xbox_up.value > 0.1 and xbox_up.timestamp > xbox_up_Last:
-            pass
-            subprocess.run(str_up, shell=True)
-=======
-            pass
-            # subprocess.run(str_left, shell=True)
             child.sendline(str_left)
 
         if xbox_up.value > 0.1 and xbox_up.timestamp > xbox_up_Last:
-            pass
-            # subprocess.run(str_up, shell=True)
->>>>>>> 8e30d63 (keyboard adapter)
             child.sendline(str_up)
 
         xbox_ri_Last = xbox_ri.timestamp
