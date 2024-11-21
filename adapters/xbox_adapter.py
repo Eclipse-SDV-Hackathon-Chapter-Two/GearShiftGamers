@@ -3,6 +3,9 @@ import pygame
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc import VSSClient
 import time
+import random
+
+
 try:
     from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
     from adapters.parameters import joy_name_left, joy_name_right, joy_name_up
@@ -40,23 +43,25 @@ class XboxController(object):
 
             pygame.event.pump()
 
+
+
             # left
             if self.joystick.get_axis(0) < -joystick_tolerance:
-                self.client.set_current_values({signal_name_left: Datapoint(value_to_send)})
-                print("<-")
+                self.client.set_current_values({signal_name_left: Datapoint(value_to_send + random.uniform(0.0, 0.1))})
+                print("<-", time.time())
             else:
                 self.client.set_current_values({signal_name_left: Datapoint(0)})
 
             # right
             if self.joystick.get_axis(0) > joystick_tolerance:
-                self.client.set_current_values({signal_name_right: Datapoint(value_to_send)})
+                self.client.set_current_values({signal_name_right: Datapoint(value_to_send + random.uniform(0.0, 0.1))})
                 print("->")
             else:
                 self.client.set_current_values({signal_name_right: Datapoint(0)})
 
             # up
             if self.joystick.get_axis(1) < -joystick_tolerance:
-                self.client.set_current_values({signal_name_up: Datapoint(value_to_send)})
+                self.client.set_current_values({signal_name_up: Datapoint(value_to_send + random.uniform(0.0, 0.1)) })
                 print("^")
             else:
                 self.client.set_current_values({signal_name_up: Datapoint(0)})
