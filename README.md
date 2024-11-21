@@ -1,6 +1,6 @@
-# GearShiftGamers
+# Project overview
 
-Project overviewWelcome to Gamer. This canvas includes everything you need to know about this project along with links to important resources and people.
+Welcome to Gamer. This canvas includes everything you need to know about this project along with links to important resources and people.
 
 ## Project description
 
