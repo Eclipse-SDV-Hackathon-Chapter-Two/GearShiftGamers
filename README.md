@@ -44,24 +44,23 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 
 1. [SDV hackathon repository](https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/GearShiftGamers.git)
 2. [SDV product list](https://projects.eclipse.org/working-group/eclipse-software-defined-vehicle)
-3. [Game Valley Blobby 2](https://sourceforge.net/projects/blobby/)
+3. [Game Blobby Volley 2](https://sourceforge.net/projects/blobby/)
     1. Dependencies `sudo apt-get install build-essential libsdl2-dev libphysfs-dev libboost-all-dev`
 4. [Ankaios](https://eclipse-ankaios.github.io/ankaios/latest/)
 5. [Ankaios Dashboard](https://github.com/FelixMoelders/ankaios-dashboard/)
 6. [Kuksa](https://eclipse-kuksa.github.io/kuksa-website/)
 7. [Podman](https://phoenixnap.com/kb/podman-tutorial)
-8. [Docker](https://www.docker.com)
-9. [Python](https://www.python.org)
-10. [Visual Studio Code](https://code.visualstudio.com)
-11. [JetBrains PyCharm](https://www.jetbrains.com/pycharm/)
+8. [Python](https://www.python.org)
+9. [Visual Studio Code](https://code.visualstudio.com)
+10. [JetBrains PyCharm](https://www.jetbrains.com/pycharm/)
 
 ## Tool stack
 
 * Linux OS (host OS for both Raspberry Pi's and laptop)
 * C++ (game source code)
 * Python 3 (adapter implementation)
-* Podman (containerizing of components)
-* Ankaios (orchestrating of the containers)
+* Podman (containerization of components)
+* Ankaios (orchestration of the containers)
 * Kuksa (communication between different nodes)
 * Visual Studio Code and JetBrains PyCharm
 
@@ -137,13 +136,10 @@ Every module is set in a Docker container.
 The container configuration is set by corresponding .dockerfile.
 
 We use [Podman](https://phoenixnap.com/kb/podman-tutorial)
-for managing the container.
-
-We use [Docker](https://www.docker.com)
-for creating the container.
+for creation of and managing the containers.
 
 An [Ankaios](https://eclipse-ankaios.github.io/ankaios/latest/)
-instance is used for container orchestrating.
+instance is used for container orchestration.
 
 ### Implementation toolstack
 
