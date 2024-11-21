@@ -10,6 +10,9 @@ except:
 
 KEY_REPEAT = 15
 
+import os
+os.environ["DISPLAY"] = ":0" 
+
 # databroker_host = '127.0.0.1'
 databroker_host = '192.168.0.148'
 databroker_port = '55555'
@@ -29,7 +32,7 @@ process = subprocess.Popen(["/bin/bash"], stdin=subprocess.PIPE, stdout=subproce
 stopwatch = time.time()
 
 while True:
-    print("stopwatch:", time.time() - time.time())
+    # print("stopwatch:", time.time() - time.time())
     Lateral = client.get_current_values([signal_name_right])
     Longitudinal = client.get_current_values([signal_name_left])
     Vertical = client.get_current_values([signal_name_up])
@@ -41,7 +44,7 @@ while True:
     # print(Pitch)
 
     try:
-        print(Roll[joy_name_right].value, Pitch[joy_name_left].value, Yaw[joy_name_up].value)
+        # print(Roll[joy_name_right].value, Pitch[joy_name_left].value, Yaw[joy_name_up].value)
         if Roll[joy_name_right].value > 0.0:
             subprocess.run(arrow_right, shell=True)
 
@@ -55,6 +58,7 @@ while True:
 
 
     try:
+        print(Lateral[signal_name_right].value)
         if Lateral[signal_name_right].value > 0.0:
             subprocess.run(str_right, shell=True)
 

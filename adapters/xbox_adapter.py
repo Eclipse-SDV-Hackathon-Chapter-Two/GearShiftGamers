@@ -44,16 +44,22 @@ class XboxController(object):
             if self.joystick.get_axis(0) < -joystick_tolerance:
                 self.client.set_current_values({signal_name_left: Datapoint(value_to_send)})
                 print("<-")
+            else:
+                self.client.set_current_values({signal_name_left: Datapoint(0)})
 
             # right
             if self.joystick.get_axis(0) > joystick_tolerance:
                 self.client.set_current_values({signal_name_right: Datapoint(value_to_send)})
                 print("->")
+            else:
+                self.client.set_current_values({signal_name_right: Datapoint(0)})
 
             # up
             if self.joystick.get_axis(1) < -joystick_tolerance:
                 self.client.set_current_values({signal_name_up: Datapoint(value_to_send)})
                 print("^")
+            else:
+                self.client.set_current_values({signal_name_right: Datapoint(0)})
 
 
 if __name__=="__main__":
