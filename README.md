@@ -50,6 +50,10 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 5. [Ankaios Dashboard](https://github.com/FelixMoelders/ankaios-dashboard/)
 6. [Kuksa](https://eclipse-kuksa.github.io/kuksa-website/)
 7. [Podman](https://phoenixnap.com/kb/podman-tutorial)
+8. [Docker](https://www.docker.com)
+9. [Python](https://www.python.org)
+10. [Visual Studio Code](https://code.visualstudio.com)
+11. [JetBrains PyCharm](https://www.jetbrains.com/pycharm/)
 
 ## Tool stack
 
@@ -84,3 +88,88 @@ https://app.slack.com/lists/T02MS1M89UH/F081NGQ3UPL
 ## Architecture
 
 ![Solution architecture](solution_architecture.drawio.svg)
+
+## Important architecture decisions
+
+### Game
+
+For purposes of the Hackathon challenge a game should be chosen.
+The following criteria should be fulfilled:
+
+- multiplayer
+- compatible with ARM and/or x86 processor architectures (source code open in the best case)
+- support for Linux
+- simple controls
+- good attraction potential
+
+The game [Valley Blobby 2](https://sourceforge.net/projects/blobby/)
+was chosen.
+
+### Transport layer
+
+We use [Kuksa](https://eclipse-kuksa.github.io/kuksa-website/)
+gRPC client to transport signals.
+
+### Signal definition
+
+We use some existing signals for transport controls 
+from the input devices to the game.
+
+| Signal name                         | Purpose    |
+|-------------------------------------|------------|
+| `Vehicle.Acceleration.Longitudinal` | Move left  |
+| `Vehicle.Acceleration.Lateral`      | Move right |
+| `Vehicle.Acceleration.Vertical`     | Jump       |
+
+### Containerizing
+
+Every module is set in a Docker container.
+The container configuration is set by corresponding .dockerfile.
+
+We use [Podman](https://phoenixnap.com/kb/podman-tutorial)
+for managing the container.
+
+We use [Docker](https://www.docker.com)
+for creating the container.
+
+An [Ankaios](https://eclipse-ankaios.github.io/ankaios/latest/)
+instance is used for container orchestrating.
+
+### Implementation toolstack
+
+We use [Python](https://www.python.org) and IDE's
+[Visual Studio Code](https://code.visualstudio.com) and
+[JetBrains PyCharm](https://www.jetbrains.com/pycharm/)
+for code developing.
+
+### Adaptation signals for game
+
+We simulate keyboard controls for both players.
+
+Player 1 uses following keys:
+
+| Key | Purpose    |
+|-----|------------|
+| A   | Move left  |
+| D   | Move right |
+| W   | Jump       |
+
+Player 2 uses the cursor keys:
+
+| Key | Purpose    |
+|-----|------------|
+| ←   | Move left  |
+| →   | Move right |
+| ↑   | Jump       |
+
+We use calls for Linux tool
+[xdotool](https://github.com/jordansissel/xdotool)
+to fake the keystrokes if corresponding signals
+are received.
+
+For simulation of the human key pressing
+we send every keystroke 30 times with delay of 1ms.
+
+````python
+str_left = f'xdotool type --delay 1 "{30*'A'}"'
+````
