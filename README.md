@@ -189,12 +189,14 @@ curl -sfL https://github.com/eclipse-ankaios/ankaios/releases/latest/download/in
 ### How configurate Ankaios Server
 
 The conent of [Service] /etc/systemd/system/ank-server.service has to be edited as:
+
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -a {HOST_IP_ADDRESS:25551} --startip-config /etc/ankaois/state.yaml
 
 ### How configurate Ankaios Agent
 The conent of [Service] /etc/systemd/system/ank-agent.service has to be edited as:
+
 [Service]
 Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -s {HOST_IP_ADDRESS:25551} --name {AGENT_NAME}
