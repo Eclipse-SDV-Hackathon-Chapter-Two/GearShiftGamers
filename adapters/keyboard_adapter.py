@@ -1,12 +1,7 @@
 from kuksa_client.grpc import VSSClient
 import subprocess
 import time
-<<<<<<< HEAD
-from datetime import datetime, timedelta
-=======
 from datetime import datetime
-from xdo import Xdo
->>>>>>> refs/remotes/origin/main
 import pexpect
 
 try:
