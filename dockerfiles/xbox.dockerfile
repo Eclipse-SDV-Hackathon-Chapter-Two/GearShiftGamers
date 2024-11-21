@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy the current directory contents into the container
 COPY adapters/xbox_adapter.py /app
+COPY adapters/parameters.py /app
 
 # Install Python dependencies
 RUN pip install --no-cache-dir pygame kuksa_client
