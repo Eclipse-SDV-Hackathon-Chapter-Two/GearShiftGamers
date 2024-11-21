@@ -13,7 +13,7 @@ except:
 # databroker_host = '127.0.0.1'
 databroker_host = '0.0.0.0'
 databroker_port = '55555'
-joystick_tolerance = 0.6
+joystick_tolerance = 0.2
 value_to_send = 1
 
 
@@ -59,7 +59,7 @@ class XboxController(object):
                 self.client.set_current_values({signal_name_up: Datapoint(value_to_send)})
                 print("^")
             else:
-                self.client.set_current_values({signal_name_right: Datapoint(0)})
+                self.client.set_current_values({signal_name_up: Datapoint(0)})
 
 
 if __name__=="__main__":
