@@ -227,3 +227,22 @@ workloads:
       commandArgs: ["--insecure"]
       commandOptions: ["--net=host"]
 ````
+### How to start Ankaios Server
+
+Log into the host machine that runs the server.
+
+Activate the server with commad:
+````python
+sudo systemctl start ank-server
+````
+### How to start Ankaios Agent
+
+Log into the host machine that runs the agent.
+First run
+````python
+sudo systemctl start ank-agent
+````
+And then run
+````python
+ank-agent -k -s {HOST_IP_ADDRESS:PORT_NUMBER} -n {AGENT_NAME}
+````
