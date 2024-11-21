@@ -1,4 +1,10 @@
+import os
 import time
+import sys
+from datetime import datetime
+from kuksa_client.grpc import VSSClient
+from kuksa_client.grpc import Datapoint
+
 import board
 import busio
 import adafruit_ads1x15.ads1115 as ADS
@@ -13,6 +19,14 @@ y_channel = AnalogIn(ads, ADS.P1)
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('192.168.0.148', 65432)
 client_socket.connect(server_address)
+
+add = os.environ.get('KUKSA_DATA_BROKER_ADDR', '198.168.0.148')
+port = int(os.environ.get('KUKSA_DATA_BROKER_PORT', '55555'))
+mode = os.environ.get('SPEED_PROVIDE_MODE', 'webui')
+
+def log(msg):
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"{now} {msg}", file=sys.stderr, flush=True)
 
 try:
     while True:
@@ -33,7 +47,11 @@ try:
             movement = "jump"
 
           if movement != "":
-            client_socket.sendall(movement.encode())
+           # client_socket.sendall(movement.encode())
+            client.set_current_values({
+            'Movement.direction': Datapoint(movement),
+            })
+            log(f"Fedding movement as {movement}.")
           print(f"X: {x_value}, Y: {y_value}")
           time.sleep(0.1)
 except KeyboardInterrupt:
