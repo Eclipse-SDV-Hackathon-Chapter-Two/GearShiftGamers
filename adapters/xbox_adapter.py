@@ -3,14 +3,13 @@ import pygame
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc import VSSClient
 import time
+from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
 
-databroker_host = '127.0.0.1'
+# databroker_host = '127.0.0.1'
+databroker_host = '0.0.0.0'
 databroker_port = '55555'
 joystick_tolerance = 0.6
 value_to_send = 1
-signal_name_left = 'Vehicle.Acceleration.Longitudinal'
-signal_name_right = 'Vehicle.Acceleration.Lateral'
-signal_name_up = 'Vehicle.Acceleration.Vertical'
 
 
 class XboxController(object):
