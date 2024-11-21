@@ -3,7 +3,12 @@ import pygame
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc import VSSClient
 import time
-from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
+try:
+    from adapters.parameters import signal_name_left, signal_name_right, signal_name_up
+    from adapters.parameters import joy_name_left, joy_name_right, joy_name_up
+except:
+    from parameters import signal_name_left, signal_name_right, signal_name_up
+    from parameters import joy_name_left, joy_name_right, joy_name_up
 
 # databroker_host = '127.0.0.1'
 databroker_host = '0.0.0.0'
