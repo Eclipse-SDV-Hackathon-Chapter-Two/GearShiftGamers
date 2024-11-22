@@ -10,7 +10,14 @@ to important resources and people.
 The implementation of the Play-by-wire hackathon challenge
 https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/challenge-play-by-wire
 
-## Goals
+## Our goals
+
+- work with the Eclipse SDV ecosystem
+- learn new stuff
+- networking
+- having fun
+
+## Steps
 
 1. Define the inputs
     - Player 1 uses the Xbox gamepad
@@ -20,7 +27,7 @@ https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/challenge-play-by-wire
         - https://sourceforge.net/projects/blobby/
         - C++ source code
 3. Develop the solution architecture
-    - [Diagram](solution_architecture.drawio.svg)
+    - [Diagram](assets/solution_architecture.drawio.svg)
 4. Define the interfaces
 5. Implement the necessary modules, test it
 6. Create the pitch slides
@@ -174,7 +181,7 @@ to fake the keystrokes if corresponding signals
 are received.
 
 For simulation of the human key pressing, 
-we send every keystroke 30 times with a delay of 1ms.
+we send every keystroke 30 times with a delay of 1 ms.
 
 ````python
 str_left = f'xdotool type --delay 1 "{30*'A'}"'
@@ -208,7 +215,7 @@ Environment="RUST_LOG=info"
 ExecStart=/usr/local/bin/ank-server --insecure -s {HOST_IP_ADDRESS:25551} --name {AGENT_NAME}
 ````
 
-### How to set agent with ymal file manifest
+### How to set agent with YAML file manifest
 
 The content of `/etc/ankaios/state.yaml` has to be edited.
 
